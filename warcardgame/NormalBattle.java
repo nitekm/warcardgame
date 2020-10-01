@@ -26,7 +26,7 @@ public class NormalBattle implements Battle{
         return 0;
     }
 
-
+    /*
     //TEST
     public static void main(String[] args) {
         ArrayList<Card> cardDeck1= new ArrayList<>();
@@ -44,6 +44,7 @@ public class NormalBattle implements Battle{
         System.out.println();
         System.out.println(battle(cardDeck1, cardDeck2));
     }
+     */
 }
 
 
