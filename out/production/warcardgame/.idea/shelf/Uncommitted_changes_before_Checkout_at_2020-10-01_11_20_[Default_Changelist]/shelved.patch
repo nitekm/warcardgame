@@ -1,0 +1,78 @@
+Index: warcardgame/WarTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package warcardgame;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Random;\r\n\r\npublic class WarTest {\r\n    public static void main(String[] args) {\r\n\r\n        int seed = 10;\r\n        int deckSize = 5;\r\n        List<Card> cardDeck1 = new ArrayList<>();\r\n        List<Card> cardDeck2 = new ArrayList<>();\r\n        Random rValue = new Random();\r\n        Random rColor = new Random();\r\n        Random rRarity = new Random();\r\n\r\n        for (int i = 0; i <= deckSize; i++) {\r\n            cardDeck1.add(new Card(rValue.nextInt(10), rColor.nextInt(4), rRarity.nextBoolean()));\r\n        }\r\n\r\n        RarityBattle.battle(cardDeck1, cardDeck2);\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- warcardgame/WarTest.java	(revision ee1e8eca6309931d2004c5f3dafc1647e70308f7)
++++ warcardgame/WarTest.java	(date 1601544009454)
+@@ -1,24 +1,29 @@
+ package warcardgame;
+ 
+ import java.util.ArrayList;
+-import java.util.List;
+ import java.util.Random;
+ 
+ public class WarTest {
+     public static void main(String[] args) {
+ 
+-        int seed = 10;
++        int seed1 = 10;
++        int seed2 = 15;
+         int deckSize = 5;
+-        List<Card> cardDeck1 = new ArrayList<>();
+-        List<Card> cardDeck2 = new ArrayList<>();
++        ArrayList<Card> cardDeck1 = new ArrayList<>();
++        ArrayList<Card> cardDeck2 = new ArrayList<>();
+         Random rValue = new Random();
+         Random rColor = new Random();
+         Random rRarity = new Random();
+ 
++
+         for (int i = 0; i <= deckSize; i++) {
+-            cardDeck1.add(new Card(rValue.nextInt(10), rColor.nextInt(4), rRarity.nextBoolean()));
++            cardDeck2.add(new Card(rValue.nextInt(seed2), rColor.nextInt(4), rRarity.nextBoolean()));
+         }
+ 
++        System.out.println("Deck with " + deckSize + " cards, seed " + seed1 + ":");
++        for (int i = 0; i <= deckSize; i++) {
++            cardDeck1.add(new Card(rValue.nextInt(seed1), rColor.nextInt(4), rRarity.nextBoolean()));
++        }
+         RarityBattle.battle(cardDeck1, cardDeck2);
+ 
+     }
+Index: warcardgame/Battle.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package warcardgame;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic interface Battle {\r\n    //ArrayList<Card> cardDeck1 = new ArrayList<>();\r\n    //ArrayList<Card> cardDeck2 = new ArrayList<>();\r\n    \r\n    public static int battle(ArrayList<Card> cardDeck1, ArrayList<Card> cardDeck2) {return 0;};\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- warcardgame/Battle.java	(revision ee1e8eca6309931d2004c5f3dafc1647e70308f7)
++++ warcardgame/Battle.java	(date 1601544009481)
+@@ -6,5 +6,5 @@
+     //ArrayList<Card> cardDeck1 = new ArrayList<>();
+     //ArrayList<Card> cardDeck2 = new ArrayList<>();
+     
+-    public static int battle(ArrayList<Card> cardDeck1, ArrayList<Card> cardDeck2) {return 0;};
++     static int battle(ArrayList<Card> cardDeck1, ArrayList<Card> cardDeck2) {return 0;};
+ }
+Index: warcardgame/RarityBattle.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package warcardgame;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class RarityBattle implements Battle {\r\n\r\n\r\n    public static int battle(List<Card> cardDeck1, List<Card> cardDeck2) {\r\n        int deck1wins = 0;\r\n        int deck2wins = 0;\r\n        for (int i=0; i<cardDeck1.size(); i++) {\r\n            if (cardDeck1.get(i).isRare() && cardDeck2.get(i).isRare() == false) deck1wins++;\r\n            if (cardDeck1.get(i).isRare() == false && cardDeck2.get(i).isRare()) deck2wins++;;\r\n        }\r\n        if (deck1wins < deck2wins) return -1;\r\n        else if (deck1wins > deck2wins) return 1;\r\n        else return 0;\r\n    }\r\n\r\n    /*\r\n    //TEST\r\n    public static void main(String[] args) {\r\n        cardDeck1.add(new Card(1,1,false));\r\n        cardDeck2.add(new Card(1,1,true));\r\n\r\n        System.out.println(battle(cardDeck1, cardDeck2));\r\n\r\n    }\r\n     */\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- warcardgame/RarityBattle.java	(revision ee1e8eca6309931d2004c5f3dafc1647e70308f7)
++++ warcardgame/RarityBattle.java	(date 1601544009424)
+@@ -6,7 +6,7 @@
+ public class RarityBattle implements Battle {
+ 
+ 
+-    public static int battle(List<Card> cardDeck1, List<Card> cardDeck2) {
++    public static int battle(ArrayList<Card> cardDeck1, ArrayList<Card> cardDeck2) {
+         int deck1wins = 0;
+         int deck2wins = 0;
+         for (int i=0; i<cardDeck1.size(); i++) {
